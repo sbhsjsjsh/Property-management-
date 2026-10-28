@@ -2,10 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-const dataFilePath = path.join(process.cwd(), 'lib/data/properties.json');
+const bundledDataPath = path.join(process.cwd(), 'lib/data/properties.json');
+const dataFilePath = '/tmp/properties.json';
 
 function readData() {
+  // If /tmp file doesn't exist, try to seed it from bundled data
   if (!fs.existsSync(dataFilePath)) {
+    if (fs.existsSync(bundledDataPath)) {
+      const bundledData = fs.readFileSync(bundledDataPath, 'utf-8');
+      fs.writeFileSync(dataFilePath, bundledData, 'utf-8');
+      return JSON.parse(bundledData);
+    }
     return [];
   }
   const jsonData = fs.readFileSync(dataFilePath, 'utf-8');
