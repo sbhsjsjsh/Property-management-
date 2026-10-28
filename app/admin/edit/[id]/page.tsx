@@ -61,9 +61,14 @@ export default function EditProperty({ params }: { params: Promise<{ id: string 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      if (file.size > 10 * 1024 * 1024) { // 10MB limit
+        setError('Image is too large. Please select an image smaller than 10MB.');
+        return;
+      }
       const reader = new FileReader();
       reader.onloadend = () => {
         setFormData(prev => ({ ...prev, image: reader.result as string }));
+        setError('');
       };
       reader.readAsDataURL(file);
     }
@@ -90,10 +95,10 @@ export default function EditProperty({ params }: { params: Promise<{ id: string 
         setTimeout(() => router.push('/admin'), 1500);
       } else {
         const data = await res.json();
-        setError(data.error || 'Failed to update property');
+        setError(data.details ? `Failed to update property: ${data.details}` : (data.error || 'Failed to update property'));
       }
-    } catch (err) {
-      setError('An unexpected error occurred');
+    } catch (err: any) {
+      setError(`An unexpected error occurred: ${err.message || 'Unknown error'}`);
     } finally {
       setLoading(false);
     }

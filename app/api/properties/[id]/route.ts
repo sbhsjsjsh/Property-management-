@@ -45,8 +45,12 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
     writeData(properties);
     
     return NextResponse.json(properties[index]);
-  } catch (error) {
-    return NextResponse.json({ error: 'Failed to update property' }, { status: 500 });
+  } catch (error: any) {
+    console.error(`Error in PUT /api/properties/${id}:`, error);
+    return NextResponse.json({ 
+      error: 'Failed to update property', 
+      details: error.message || 'Unknown error'
+    }, { status: 500 });
   }
 }
 

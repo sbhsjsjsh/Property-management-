@@ -28,6 +28,13 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const newProperty = await req.json();
+    
+    // Ensure directory exists
+    const dir = path.dirname(dataFilePath);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+
     const properties = readData();
     
     const propertyWithId = {
@@ -39,7 +46,11 @@ export async function POST(req: NextRequest) {
     writeData(properties);
     
     return NextResponse.json(propertyWithId, { status: 201 });
-  } catch (error) {
-    return NextResponse.json({ error: 'Failed to add property' }, { status: 500 });
+  } catch (error: any) {
+    console.error('Error in POST /api/properties:', error);
+    return NextResponse.json({ 
+      error: 'Failed to add property', 
+      details: error.message || 'Unknown error'
+    }, { status: 500 });
   }
 }
