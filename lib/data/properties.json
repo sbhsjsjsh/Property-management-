@@ -1,0 +1,35 @@
+[
+  {
+    "id": "1",
+    "name": "Skyline Heights Penthouse",
+    "location": "Worli, Mumbai",
+    "price": "₹45.5 Cr",
+    "description": "Ultra-luxury sea-facing penthouse with panoramic views of the Arabian Sea and the Bandra-Worli Sea Link.",
+    "image": "",
+    "bedrooms": 4,
+    "bathrooms": 5,
+    "area": "6,500 sqft"
+  },
+  {
+    "id": "2",
+    "name": "The Heritage Manor",
+    "location": "Lutyens' Delhi, Delhi",
+    "price": "₹120.0 Cr",
+    "description": "An iconic heritage estate featuring grand colonial architecture and sprawling manicured lawns in the heart of the capital.",
+    "image": "",
+    "bedrooms": 6,
+    "bathrooms": 7,
+    "area": "12,000 sqft"
+  },
+  {
+    "id": "3",
+    "name": "Emerald Valley Villa",
+    "location": "Indiranagar, Bengaluru",
+    "price": "₹12.8 Cr",
+    "description": "A modern sustainable villa blending tech-forward living with lush tropical vertical gardens.",
+    "image": "",
+    "bedrooms": 4,
+    "bathrooms": 4,
+    "area": "4,200 sqft"
+  }
+]
