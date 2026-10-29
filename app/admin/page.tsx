@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import { 
   Plus, 
   Search, 
   Edit2, 
   Trash2, 
-  ExternalLink, 
   Loader2, 
   Building2, 
   ArrowLeft,
@@ -20,18 +20,7 @@ import {
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'motion/react';
 import { useAdminAuth } from '@/components/AdminAuthProvider';
-
-interface Property {
-  id: string;
-  name: string;
-  location: string;
-  price: string;
-  description: string;
-  image: string;
-  bedrooms: number;
-  bathrooms: number;
-  area: string;
-}
+import { Property } from '@/lib/types';
 
 export default function AdminDashboard() {
   const { logout } = useAdminAuth();
@@ -93,89 +82,89 @@ export default function AdminDashboard() {
     <main className="min-h-screen bg-neutral-50/50">
       <Navbar />
       
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="max-w-7xl mx-auto px-6 py-32">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
           <div>
             <div className="flex items-center gap-2 text-neutral-500 mb-2">
-              <Link href="/" className="hover:text-neutral-900 transition-colors flex items-center gap-1 text-xs font-medium uppercase tracking-wider">
+              <Link href="/" className="hover:text-neutral-900 transition-colors flex items-center gap-1 text-[9px] font-bold uppercase tracking-[0.2em]">
                 <ArrowLeft className="w-3 h-3" />
                 Back to Site
               </Link>
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-neutral-900 tracking-tight">
-              Property Dashboard
+            <h1 className="text-3xl font-bold text-neutral-950 tracking-tighter">
+              Asset Management
             </h1>
           </div>
           
           <div className="flex items-center gap-3">
             <button 
               onClick={logout}
-              className="flex items-center gap-2 px-4 py-3 text-neutral-500 hover:text-neutral-900 font-semibold transition-all"
+              className="flex items-center gap-2 px-4 py-3 text-[10px] font-bold text-neutral-400 hover:text-neutral-950 uppercase tracking-widest transition-all"
             >
-              <LogOut className="w-4 h-4" />
-              <span className="hidden sm:inline">Logout</span>
+              <LogOut className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Terminate Session</span>
             </button>
             <Link 
               href="/admin/add" 
-              className="flex items-center gap-2 px-6 py-3 bg-neutral-900 text-white rounded-xl font-semibold hover:bg-neutral-800 transition-all shadow-lg shadow-neutral-900/10"
+              className="flex items-center gap-2 px-6 py-3.5 bg-neutral-950 text-white rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-neutral-800 transition-all shadow-xl shadow-neutral-950/10"
             >
-              <Plus className="w-4 h-4" />
-              Add New Property
+              <Plus className="w-3.5 h-3.5" />
+              Onboard Residence
             </Link>
           </div>
         </div>
 
         {/* Stats / Controls */}
-        <div className="bg-white border border-neutral-100 rounded-2xl p-6 mb-8 flex flex-col lg:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-8 w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0">
+        <div className="bg-white border border-neutral-100 rounded-3xl p-5 mb-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-sm">
+          <div className="flex items-center gap-6 w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0">
             <div className="flex flex-col shrink-0">
-              <span className="text-xs font-medium text-neutral-400 uppercase tracking-widest mb-1">Total Listings</span>
-              <span className="text-2xl font-bold text-neutral-900 tabular-nums">{properties.length}</span>
+              <span className="text-[9px] font-bold text-neutral-300 uppercase tracking-[0.2em] mb-1">Total Assets</span>
+              <span className="text-xl font-bold text-neutral-950 tabular-nums">{properties.length}</span>
             </div>
-            <div className="h-10 w-px bg-neutral-100 shrink-0" />
+            <div className="h-8 w-px bg-neutral-100 shrink-0" />
             <div className="flex flex-col shrink-0">
-              <span className="text-xs font-medium text-neutral-400 uppercase tracking-widest mb-1">Active</span>
-              <span className="text-2xl font-bold text-neutral-900 tabular-nums">{properties.length}</span>
+              <span className="text-[9px] font-bold text-neutral-300 uppercase tracking-[0.2em] mb-1">Active Listings</span>
+              <span className="text-xl font-bold text-neutral-950 tabular-nums">{properties.length}</span>
             </div>
             
-            <div className="h-10 w-px bg-neutral-100 shrink-0" />
+            <div className="h-8 w-px bg-neutral-100 shrink-0" />
             
             <div className="flex items-center p-1 bg-neutral-50 rounded-xl border border-neutral-100 shrink-0">
               <button 
                 onClick={() => setViewMode('list')}
-                className={`p-2 rounded-lg transition-all ${viewMode === 'list' ? 'bg-white text-neutral-900 shadow-sm' : 'text-neutral-400 hover:text-neutral-600'}`}
+                className={`p-2 rounded-lg transition-all ${viewMode === 'list' ? 'bg-white text-neutral-950 shadow-sm' : 'text-neutral-300 hover:text-neutral-500'}`}
                 title="List View"
               >
-                <List className="w-4 h-4" />
+                <List className="w-3.5 h-3.5" />
               </button>
               <button 
                 onClick={() => setViewMode('grid')}
-                className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-white text-neutral-900 shadow-sm' : 'text-neutral-400 hover:text-neutral-600'}`}
+                className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-white text-neutral-950 shadow-sm' : 'text-neutral-300 hover:text-neutral-500'}`}
                 title="Grid View"
               >
-                <LayoutGrid className="w-4 h-4" />
+                <LayoutGrid className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
 
           <div className="relative w-full lg:w-96">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-neutral-300" />
             <input 
               type="text" 
-              placeholder="Filter by name or location..."
+              placeholder="FILTER ASSETS..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-neutral-50 border border-neutral-100 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/5 focus:border-neutral-900 transition-all"
+              className="w-full pl-10 pr-4 py-3.5 bg-neutral-50 border border-neutral-100 rounded-2xl text-[10px] font-bold uppercase tracking-widest focus:outline-none focus:ring-4 focus:ring-neutral-900/5 focus:border-neutral-900 transition-all placeholder:text-neutral-200"
             />
           </div>
         </div>
 
         {/* Content Area */}
         {loading ? (
-          <div className="py-24 flex flex-col items-center justify-center gap-4 bg-white border border-neutral-100 rounded-2xl">
+          <div className="py-24 flex flex-col items-center justify-center gap-4 bg-white border border-neutral-100 rounded-3xl">
             <Loader2 className="w-8 h-8 animate-spin text-neutral-200" />
-            <span className="text-neutral-400 text-sm font-medium">Loading inventory...</span>
+            <span className="text-neutral-400 text-[10px] font-bold uppercase tracking-widest">Scanning Assets...</span>
           </div>
         ) : (
           <AnimatePresence mode="wait">
@@ -185,17 +174,18 @@ export default function AdminDashboard() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="bg-white border border-neutral-100 rounded-2xl overflow-hidden shadow-sm"
+                className="bg-white border border-neutral-100 rounded-3xl overflow-hidden shadow-sm"
               >
                 <div className="overflow-x-auto">
                   <table className="w-full text-left">
                     <thead>
                       <tr className="border-b border-neutral-100">
-                        <th className="px-6 py-5 text-xs font-bold text-neutral-400 uppercase tracking-widest">Property</th>
-                        <th className="px-6 py-5 text-xs font-bold text-neutral-400 uppercase tracking-widest">Location</th>
-                        <th className="px-6 py-5 text-xs font-bold text-neutral-400 uppercase tracking-widest">Price</th>
-                        <th className="px-6 py-5 text-xs font-bold text-neutral-400 uppercase tracking-widest">Details</th>
-                        <th className="px-6 py-5 text-xs font-bold text-neutral-400 uppercase tracking-widest text-right">Actions</th>
+                        <th className="px-6 py-5 text-[10px] font-bold text-neutral-400 uppercase tracking-[0.2em]">Residence</th>
+                        <th className="px-6 py-5 text-[10px] font-bold text-neutral-400 uppercase tracking-[0.2em]">Type</th>
+                        <th className="px-6 py-5 text-[10px] font-bold text-neutral-400 uppercase tracking-[0.2em]">Location</th>
+                        <th className="px-6 py-5 text-[10px] font-bold text-neutral-400 uppercase tracking-[0.2em]">Valuation</th>
+                        <th className="px-6 py-5 text-[10px] font-bold text-neutral-400 uppercase tracking-[0.2em]">Specifications</th>
+                        <th className="px-6 py-5 text-[10px] font-bold text-neutral-400 uppercase tracking-[0.2em] text-right">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-neutral-50">
@@ -207,11 +197,11 @@ export default function AdminDashboard() {
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
                               exit={{ opacity: 0, x: -20 }}
-                              className="hover:bg-neutral-50/50 transition-colors"
+                              className="hover:bg-neutral-50/50 transition-colors group"
                             >
                               <td className="px-6 py-5">
                                 <div className="flex items-center gap-4">
-                                  <div className="w-12 h-12 rounded-lg bg-neutral-100 overflow-hidden relative shrink-0">
+                                  <div className="w-12 h-12 rounded-xl bg-neutral-100 overflow-hidden relative shrink-0">
                                     {property.image ? (
                                       <img 
                                         src={property.image} 
@@ -224,17 +214,20 @@ export default function AdminDashboard() {
                                       </div>
                                     )}
                                   </div>
-                                  <span className="font-semibold text-neutral-900">{property.name}</span>
+                                  <span className="font-bold text-neutral-950">{property.name}</span>
                                 </div>
                               </td>
                               <td className="px-6 py-5">
-                                <span className="text-neutral-500 text-sm">{property.location}</span>
+                                <span className="px-3 py-1 bg-neutral-100 rounded-full text-[10px] font-bold text-neutral-500 uppercase tracking-widest">{property.type}</span>
                               </td>
                               <td className="px-6 py-5">
-                                <span className="text-neutral-900 font-medium tabular-nums">{property.price}</span>
+                                <span className="text-neutral-500 text-sm font-medium">{property.location}</span>
                               </td>
                               <td className="px-6 py-5">
-                                <div className="flex items-center gap-3 text-xs text-neutral-400 tabular-nums">
+                                <span className="text-neutral-900 font-bold tabular-nums">{property.price}</span>
+                              </td>
+                              <td className="px-6 py-5">
+                                <div className="flex items-center gap-3 text-xs text-neutral-400 font-bold tabular-nums">
                                   <span>{property.bedrooms} BR</span>
                                   <span>·</span>
                                   <span>{property.bathrooms} BA</span>
@@ -265,7 +258,7 @@ export default function AdminDashboard() {
                                     <>
                                       <Link 
                                         href={`/admin/edit/${property.id}`}
-                                        className="p-2 text-neutral-400 hover:text-neutral-900 hover:bg-white rounded-lg transition-all border border-transparent hover:border-neutral-100 shadow-sm shadow-transparent hover:shadow-neutral-200/20"
+                                        className="p-2 text-neutral-400 hover:text-neutral-950 hover:bg-white rounded-lg transition-all border border-transparent hover:border-neutral-100 shadow-sm shadow-transparent hover:shadow-neutral-200/20"
                                       >
                                         <Edit2 className="w-4 h-4" />
                                       </Link>
@@ -283,8 +276,8 @@ export default function AdminDashboard() {
                           ))
                         ) : (
                           <tr>
-                            <td colSpan={5} className="px-6 py-24 text-center">
-                              <p className="text-neutral-400 text-sm">No properties found.</p>
+                            <td colSpan={6} className="px-6 py-24 text-center">
+                              <p className="text-neutral-300 text-xs font-bold uppercase tracking-widest italic">No residences onboarded.</p>
                             </td>
                           </tr>
                         )}
@@ -309,7 +302,7 @@ export default function AdminDashboard() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95 }}
-                        className="group bg-white border border-neutral-100 rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-neutral-900/5 transition-all duration-500 flex flex-col"
+                        className="group bg-white border border-neutral-100 rounded-[2rem] overflow-hidden hover:shadow-2xl hover:shadow-neutral-900/5 transition-all duration-500 flex flex-col"
                       >
                         <div className="relative aspect-[4/3] w-full bg-neutral-100 overflow-hidden">
                           {property.image ? (
@@ -324,27 +317,27 @@ export default function AdminDashboard() {
                             </div>
                           )}
                           
-                          <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full text-xs font-bold text-neutral-900 shadow-sm">
+                          <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full text-[10px] font-bold text-neutral-950 shadow-sm">
                             {property.price}
                           </div>
                           
                           {/* Overlay Controls */}
-                          <div className="absolute inset-0 bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3 backdrop-blur-[2px]">
+                          <div className="absolute inset-0 bg-neutral-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3 backdrop-blur-[2px]">
                             {confirmingDeleteId === property.id ? (
-                              <div className="bg-white rounded-2xl p-4 flex flex-col items-center gap-3 shadow-xl">
-                                <span className="text-xs font-bold text-neutral-900 uppercase tracking-wider">Confirm Delete?</span>
+                              <div className="bg-white rounded-3xl p-6 flex flex-col items-center gap-4 shadow-2xl">
+                                <span className="text-[10px] font-bold text-neutral-950 uppercase tracking-[0.2em]">Confirm Deletion?</span>
                                 <div className="flex gap-2 w-full">
                                   <button 
                                     onClick={() => executeDelete(property.id)}
                                     disabled={deletingId === property.id}
-                                    className="flex-1 py-2 bg-red-600 text-white rounded-xl font-bold text-[10px] flex items-center justify-center gap-1 disabled:opacity-50"
+                                    className="flex-1 py-3 bg-red-600 text-white rounded-2xl font-bold text-[10px] flex items-center justify-center gap-1 disabled:opacity-50"
                                   >
                                     {deletingId === property.id ? <Loader2 className="w-3 h-3 animate-spin" /> : <Check className="w-3 h-3" />}
                                     DELETE
                                   </button>
                                   <button 
                                     onClick={cancelDelete}
-                                    className="flex-1 py-2 bg-neutral-100 text-neutral-900 rounded-xl font-bold text-[10px]"
+                                    className="flex-1 py-3 bg-neutral-50 text-neutral-900 rounded-2xl font-bold text-[10px]"
                                   >
                                     NO
                                   </button>
@@ -354,7 +347,7 @@ export default function AdminDashboard() {
                               <>
                                 <Link 
                                   href={`/admin/edit/${property.id}`}
-                                  className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-neutral-900 hover:scale-110 transition-transform shadow-lg"
+                                  className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-neutral-950 hover:scale-110 transition-transform shadow-lg"
                                 >
                                   <Edit2 className="w-5 h-5" />
                                 </Link>
@@ -370,9 +363,12 @@ export default function AdminDashboard() {
                         </div>
                         
                         <div className="p-6 flex-1 flex flex-col">
-                          <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-[0.2em] mb-2">{property.location}</span>
-                          <h3 className="text-lg font-bold text-neutral-900 mb-4 line-clamp-1">{property.name}</h3>
-                          <div className="mt-auto pt-6 border-t border-neutral-50 flex items-center gap-4 text-xs text-neutral-400 tabular-nums">
+                          <div className="flex justify-between items-start mb-2">
+                            <span className="text-[9px] font-bold text-neutral-300 uppercase tracking-[0.2em]">{property.location}</span>
+                            <span className="text-[9px] font-bold text-neutral-400 bg-neutral-50 px-2 py-0.5 rounded-full uppercase tracking-widest">{property.type}</span>
+                          </div>
+                          <h3 className="text-lg font-bold text-neutral-950 mb-4 line-clamp-1">{property.name}</h3>
+                          <div className="mt-auto pt-6 border-t border-neutral-50 flex items-center gap-4 text-[10px] text-neutral-400 font-bold tabular-nums">
                             <span>{property.bedrooms} BR</span>
                             <span>·</span>
                             <span>{property.bathrooms} BA</span>
@@ -382,8 +378,8 @@ export default function AdminDashboard() {
                       </motion.div>
                     ))
                   ) : (
-                    <div className="col-span-full py-32 text-center bg-white border border-neutral-100 rounded-3xl">
-                      <p className="text-neutral-400 text-sm">No properties found.</p>
+                    <div className="col-span-full py-32 text-center bg-white border border-neutral-100 rounded-[2.5rem]">
+                      <p className="text-neutral-300 text-xs font-bold uppercase tracking-widest italic">No matching residences found.</p>
                     </div>
                   )}
                 </AnimatePresence>
@@ -392,6 +388,8 @@ export default function AdminDashboard() {
           </AnimatePresence>
         )}
       </div>
+
+      <Footer />
     </main>
   );
 }

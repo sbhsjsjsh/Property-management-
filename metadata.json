@@ -1,6 +1,6 @@
 {
   "name": "Delicacy Property",
-  "description": "Exquisite property showcase for high-end real estate listings with an integrated management dashboard.",
+  "description": "Mumbai's premiere luxury real estate showcase, featuring curated high-end residences and an exclusive management suite.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
