@@ -23,16 +23,16 @@ export default function Navbar() {
         {/* Zone 2: Nav Links */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-500">
           <Link href="/" className="hover:text-neutral-900 transition-colors whitespace-nowrap shrink-0">Home</Link>
-          <Link href="/#listings" className="hover:text-neutral-900 transition-colors whitespace-nowrap shrink-0">Listings</Link>
+          <Link href="/listings" className="hover:text-neutral-900 transition-colors whitespace-nowrap shrink-0">Available Properties</Link>
         </nav>
 
         {/* Zone 3: Action */}
         <div className="flex items-center gap-4 shrink-0">
           <Link 
-            href="/#listings" 
+            href="/listings" 
             className="hidden md:block px-6 py-2.5 text-xs font-semibold text-white bg-neutral-900 rounded-full hover:bg-neutral-800 transition-colors whitespace-nowrap shrink-0"
           >
-            Explore Collection
+            View Collection
           </Link>
           
           <button 
@@ -52,13 +52,13 @@ export default function Navbar() {
           className="md:hidden bg-white border-b border-neutral-100 px-6 py-8 flex flex-col gap-6"
         >
           <Link href="/" onClick={() => setIsOpen(false)} className="text-lg font-medium text-neutral-900">Home</Link>
-          <Link href="/#listings" onClick={() => setIsOpen(false)} className="text-lg font-medium text-neutral-900">Listings</Link>
+          <Link href="/listings" onClick={() => setIsOpen(false)} className="text-lg font-medium text-neutral-900">Available Properties</Link>
           <Link 
-            href="/#listings" 
+            href="/listings" 
             onClick={() => setIsOpen(false)}
             className="w-full text-center py-4 bg-neutral-900 text-white rounded-xl font-semibold"
           >
-            Explore Collection
+            View Collection
           </Link>
         </motion.div>
       )}

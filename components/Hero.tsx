@@ -2,6 +2,7 @@
 
 import { motion } from 'motion/react';
 import { ArrowRight, Search } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Hero() {
   return (
@@ -30,13 +31,13 @@ export default function Hero() {
           </p>
           
           <div className="mt-8 flex flex-col sm:flex-row gap-4 items-center">
-            <a 
-              href="#listings" 
+            <Link 
+              href="/listings" 
               className="group px-8 py-4 bg-white text-neutral-950 rounded-full font-semibold flex items-center gap-2 hover:bg-neutral-200 transition-all duration-300"
             >
-              Explore Listings
+              Explore Collection
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>
